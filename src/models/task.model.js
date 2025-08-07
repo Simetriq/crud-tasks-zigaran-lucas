@@ -1,9 +1,10 @@
-import { DataTypes } from "sequelize";
+import sequelize from "sequelize";
 
-const tasks_users_db = sequelize.define("tasks_users_db", {
+const TaskModel = sequelize.define("tasks_users_db", {
   title: {
     type: DataTypes.STRING(100),
     allowNull: false,
+    unique: true,
   },
   description: {
     type: DataTypes.STRING,
@@ -12,6 +13,7 @@ const tasks_users_db = sequelize.define("tasks_users_db", {
   isComplete: {
     type: DataTypes.BOOLEAN,
     allowNull: false,
-    default: false,
+    defaultValue: false,
   },
 });
+export default TaskModel;

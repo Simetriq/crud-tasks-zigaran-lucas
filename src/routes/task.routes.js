@@ -1,9 +1,12 @@
 import express from "express";
+import routes from "./user.routes";
 
 routes = express.Router();
 
-routes.POST("/api/tasks:");
-routes.GET("/api/tasks:");
-routes.GET("/api/tasks/:id:");
-routes.PUT("/api/tasks/:id:");
-routes.DELETE("/api/tasks/:id:");
+routes.POST("/api/tasks:", crearTask);
+routes.GET("/api/tasks:", obtenerTodasLasTask);
+routes.GET("/api/tasks/:id:", obtenerTaskporId);
+routes.PUT("/api/tasks/:id:", actualizarTask);
+routes.DELETE("/api/tasks/:id:", borrarTask);
+
+export default routes;

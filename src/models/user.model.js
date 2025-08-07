@@ -1,12 +1,13 @@
 import { DataTypes } from "sequelize";
 
-const tasks_users_db = sequelize.define("tasks_users_db", {
+const UserModel = sequelize.define("tasks_users_db", {
   name: {
     type: DataTypes.STRING(100),
     allowNull: false,
   },
   email: {
     type: DataTypes.STRING(100),
+    unique: true,
     allowNull: false,
   },
   password: {
@@ -14,3 +15,5 @@ const tasks_users_db = sequelize.define("tasks_users_db", {
     allowNull: false,
   },
 });
+
+export default UserModel;
