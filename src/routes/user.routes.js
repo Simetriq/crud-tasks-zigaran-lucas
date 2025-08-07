@@ -1,11 +1,11 @@
 import express from "express";
 
-routesUser = express.Router();
+const routesUser = express.Router();
 
-routes.POST("/api/users:", createUser);
-routes.GET("/api/users:", traerTodoLosUser);
-routes.GET("/api/users/:id:", traerUserId);
-routes.PUT("/api/users/:id:", actualizarUser);
-routes.DELETE("/api/users/:id:", borrarUser);
+routesUser.post("/api/users:", createUser);
+routesUser.get("/api/users:", traerTodoLosUser);
+routesUser.get("/api/users/:id:", traerUserId);
+routesUser.put("/api/users/:id:", actualizarUser);
+routesUser.delete("/api/users/:id:", borrarUser);
 
 export default routesUser;
