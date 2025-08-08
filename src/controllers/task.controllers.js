@@ -1,4 +1,4 @@
-import { where } from "sequelize";
+import sequelize from "sequelize";
 import TaskModel from "../models/task.model.js";
 
 export const postTask = async (req, res) => {
