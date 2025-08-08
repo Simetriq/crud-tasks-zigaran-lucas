@@ -1,7 +1,7 @@
 import sequelize from "../config/database.js";
 import { DataTypes } from "sequelize";
 
-const UserModel = sequelize.define("tasks_users_db", {
+const UserModel = sequelize.define("UserModel", {
   name: {
     type: DataTypes.STRING(100),
     allowNull: false,

@@ -1,7 +1,7 @@
 import sequelize from "../config/database.js";
 import { DataTypes } from "sequelize";
 
-const TaskModel = sequelize.define("tasks_users_db", {
+const TaskModel = sequelize.define("TaskModel", {
   title: {
     type: DataTypes.STRING(100),
     allowNull: false,

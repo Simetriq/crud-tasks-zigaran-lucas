@@ -1,3 +1,4 @@
+import { where } from "sequelize";
 import TaskModel from "../models/task.model.js";
 
 export const postTask = async (req, res) => {
@@ -16,7 +17,7 @@ export const postTask = async (req, res) => {
   } catch (error) {
     return res
       .status(400)
-      .json({ message: "Error al tratar de traer todos los lenguajes" });
+      .json({ message: "Error al tratar de crear una tarea" });
   }
 };
 export const getAllTask = async (req, res) => {
@@ -26,7 +27,7 @@ export const getAllTask = async (req, res) => {
   } catch (error) {
     return res
       .status(400)
-      .json({ message: "Error al tratar de traer todos los lenguajes" });
+      .json({ message: "Error al tratar de traer todas las tareas" });
   }
 };
 export const getTaskporId = async (req, res) => {
@@ -36,7 +37,7 @@ export const getTaskporId = async (req, res) => {
   } catch (error) {
     return res
       .status(400)
-      .json({ message: "Error al tratar de traer todos los lenguajes" });
+      .json({ message: "Error al tratar de buscar una tarea por id" });
   }
 };
 export const updateTask = async (req, res) => {
@@ -58,14 +59,18 @@ export const updateTask = async (req, res) => {
   } catch (error) {
     return res
       .status(400)
-      .json({ message: "Error al tratar de traer todos los lenguajes" });
+      .json({ message: "Error al tratar de actualizar una tarea" });
   }
 };
 export const deleteTask = async (req, res) => {
   try {
+    const deleteTaksById = await TaskModel.destroy({
+      where: { id: req.params.id },
+    });
+    return res.status(200).json({ message: "Se borro exitosamente la tarea" });
   } catch (error) {
     return res
       .status(400)
-      .json({ message: "Error al tratar de traer todos los lenguajes" });
+      .json({ message: "Error al tratar de borrar una tarea" });
   }
 };
