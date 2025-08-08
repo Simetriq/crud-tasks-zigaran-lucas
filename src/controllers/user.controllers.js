@@ -10,6 +10,8 @@ export const postUser = async (req, res) => {
 };
 export const getAllUser = async (req, res) => {
   try {
+    const traerTodasLosUsuarios = await UserModel.findAll();
+    return res.status(302).json(traerTodasLosUsuarios);
   } catch (error) {
     return res
       .status(400)
@@ -18,6 +20,8 @@ export const getAllUser = async (req, res) => {
 };
 export const getUserId = async (req, res) => {
   try {
+    const findUserId = UserModel.findByPk(req.params.id);
+    return res.status(302).json(findUserId);
   } catch (error) {
     return res
       .status(400)
