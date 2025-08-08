@@ -9,10 +9,10 @@ import {
 
 const routesUser = express.Router();
 
-routesUser.post("/api/users", postUser);
-routesUser.get("/api/users", getAllUser);
-routesUser.get("/api/users/:id", getUserId);
-routesUser.put("/api/users/:id", putUser);
-routesUser.delete("/api/users/:id", deleteUser);
+routesUser.post("/users", postUser);
+routesUser.get("/users", getAllUser);
+routesUser.get("/users/:id", getUserId);
+routesUser.put("/users/:id", putUser);
+routesUser.delete("/users/:id", deleteUser);
 
 export default routesUser;

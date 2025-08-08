@@ -1,16 +1,41 @@
-import sequelize from "sequelize";
+import sequelize, { where } from "sequelize";
 import TaskModel from "../models/task.model.js";
 
 export const postTask = async (req, res) => {
+  if (req.body) {
+    for (let value in req.body) {
+      if (typeof req.body[value] === "string") {
+        req.body[value] = req.body[value].trim();
+      }
+    }
+  }
+
   try {
-    const validacionDeTask = [
-      body("title")
-        .notEmpty()
-        .withMessage("El título es obligatorio y no debe ser vacio")
-        .isLength({ max: 100 })
-        .withMessage("Máximo 100 caracteres")
-        .trim(),
-    ];
+    const { title, description, isComplete } = req.body;
+
+    const titleUnico = await TaskModel.findOne({ where: { title } });
+    if (titleUnico)
+      return res
+        .status(400)
+        .json({ message: "este titulo ya esta registrado" });
+
+    if (title === undefined || title === "" || title === null)
+      return res.status(400).json({ message: "title no debe estar vacio" });
+    if (title.length > 100)
+      return res
+        .status(400)
+        .json({ message: "title no debe ser mayor a 100 caracteres" });
+    if (description.length > 100)
+      return res
+        .status(400)
+        .json({ message: "la descripcion no debe ser mayor a 100 caracteres" });
+
+    if (description === undefined || description === "")
+      return res
+        .status(400)
+        .json({ message: "description no debe estar vacio" });
+    if (typeof isComplete !== "boolean")
+      return res.status(400).json({ message: "isComplete debe ser booleano" });
 
     const CrearUnaTarea = await TaskModel.create(req.body);
     return res.status(200).json(CrearUnaTarea);
