@@ -65,11 +65,16 @@ export const getUserId = async (req, res) => {
 };
 export const putUser = async (req, res) => {
   try {
-    const [updateTaskById] = await TaskModel.update(req.body, {
+    const emailUnico = await UserModel.findOne({
+      where: { email: email, id: { [Op.ne]: req.params.id } },
+    });
+    if (emailUnico)
+      return res.status(400).json({ message: "este email ya esta registrado" });
+    const [updateUserById] = await TaskModel.update(req.body, {
       where: { id: req.params.id },
     });
 
-    if (updateTaskById) {
+    if (updateUserById) {
       const taskActualizado = await TaskModel.findById(req.params.id);
       return res
         .status(200)

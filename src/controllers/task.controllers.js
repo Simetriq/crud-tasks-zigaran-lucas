@@ -1,4 +1,4 @@
-import sequelize, { where } from "sequelize";
+import sequelize, { Op, where } from "sequelize";
 import TaskModel from "../models/task.model.js";
 
 export const postTask = async (req, res) => {
@@ -67,6 +67,14 @@ export const getTaskporId = async (req, res) => {
 };
 export const updateTask = async (req, res) => {
   try {
+    const titleUnico = await TaskModel.findOne({
+      where: { title: title, id: { [Op.ne]: req.params.id } },
+    });
+    if (titleUnico)
+      return res
+        .status(400)
+        .json({ message: "este titulo ya esta registrado" });
+
     const [updateTaskById] = await TaskModel.update(req.body, {
       where: { id: req.params.id },
     });
