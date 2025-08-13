@@ -1,5 +1,6 @@
 import sequelize from "../config/database.js";
-import { DataTypes } from "sequelize";
+import { DataTypes, ForeignKeyConstraintError, Op } from "sequelize";
+import TaskModel from "./task.model.js";
 
 const UserModel = sequelize.define("Users", {
   name: {
@@ -18,3 +19,7 @@ const UserModel = sequelize.define("Users", {
 });
 
 export default UserModel;
+
+UserModel.hasMany(TaskModel, { ForeignKey: "userId" });
+
+TaskModel.belongsTo(UserModel, { ForeignKey: "userId" });
