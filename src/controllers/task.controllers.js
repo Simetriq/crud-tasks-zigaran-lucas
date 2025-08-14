@@ -1,5 +1,6 @@
 import sequelize, { where } from "sequelize";
 import TaskModel from "../models/task.model.js";
+import UserModel from "../models/user.model.js";
 
 export const postTask = async (req, res) => {
   if (req.body) {
@@ -48,9 +49,21 @@ export const postTask = async (req, res) => {
 };
 export const getAllTask = async (req, res) => {
   try {
-    const traerTodasLasTareas = await TaskModel.findAll();
+    const traerTodasLasTareas = await TaskModel.findAll({
+      attributes: {
+        exclude: ["user_id"],
+      },
+      include: [
+        {
+          model: UserModel,
+          as: "user",
+          attributes: { exclude: ["password", "createdAt", "updatedAt"] },
+        },
+      ],
+    });
     return res.status(302).json(traerTodasLasTareas);
   } catch (error) {
+    console.error(error);
     return res
       .status(400)
       .json({ message: "Error al tratar de traer todas las tareas" });
