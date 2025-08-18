@@ -6,7 +6,7 @@ import {
 
 const routesUserCourse = express.Router();
 
-routesUser.post("/userCourse", postUserCourse);
-routesUser.get("/userCourse", getAllUserCourse);
+routesUserCourse.post("/userCourse", postUserCourse);
+routesUserCourse.get("/userCourse", getAllUserCourse);
 
 export default routesUserCourse;

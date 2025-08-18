@@ -1,7 +1,7 @@
 import sequelize from "../config/database.js";
 import { DataTypes } from "sequelize";
 
-const courseModel = sequelize.define(
+const CourseModel = sequelize.define(
   "Course",
   {
     course: {
@@ -19,7 +19,7 @@ const courseModel = sequelize.define(
   }
 );
 
-export default courseModel;
+export default CourseModel;
 
 //! relacion de muchos a muchos, muchos cursos tienen varios usuarios y los usuarios
 //! tienen varios cursos, se necesita una tabla intermedia, entre usuario y cursos,

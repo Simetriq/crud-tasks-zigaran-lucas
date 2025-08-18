@@ -1,5 +1,4 @@
 import ProfileModel from "../models/profile.model.js";
-import { Op } from "sequelize";
 
 export const post_profile = async (req, res) => {
   try {

@@ -1,9 +1,8 @@
-import courseModel from "../models/course.model.js";
-import { Op } from "sequelize";
+import CourseModel from "../models/course.model.js";
 
-export const post_course = async (req, res) => {
+export const PostCourse = async (req, res) => {
   try {
-    const CrearUnCurso = await courseModel.create(req.body);
+    const CrearUnCurso = await CourseModel.create(req.body);
     return res.status(200).json(CrearUnCurso);
   } catch (error) {
     return res
@@ -11,9 +10,9 @@ export const post_course = async (req, res) => {
       .json({ message: "Error al tratar de crear un curso" });
   }
 };
-export const getUserCourse = async (req, res) => {
+export const GetCourse = async (req, res) => {
   try {
-    const findAllCourses = await courseModel.findAll();
+    const findAllCourses = await CourseModel.findAll();
     return res.status(302).json(findAllCourses);
   } catch (error) {
     return res

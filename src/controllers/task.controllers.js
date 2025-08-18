@@ -1,4 +1,3 @@
-import sequelize, { where } from "sequelize";
 import TaskModel from "../models/task.model.js";
 import UserModel from "../models/user.model.js";
 

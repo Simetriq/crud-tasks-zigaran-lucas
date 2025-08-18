@@ -1,9 +1,9 @@
 import express from "express";
-import { get_course, post_course } from "../controllers/course.controllers.js";
+import { GetCourse, PostCourse } from "../controllers/course.controllers.js";
 
-const courseRoutes = express.Router();
+const CourseRoutes = express.Router();
 
-courseRoutes.post("/course", post_course);
-courseRoutes.get("/course/:id", get_course);
+CourseRoutes.post("/course", PostCourse);
+CourseRoutes.get("/course/:id", GetCourse);
 
-export default courseRoutes;
+export default CourseRoutes;
