@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 import sequelize, { Op, where } from "sequelize";
+=======
+>>>>>>> develop
 import TaskModel from "../models/task.model.js";
+import UserModel from "../models/user.model.js";
 
 export const postTask = async (req, res) => {
   if (req.body) {
@@ -21,6 +25,14 @@ export const postTask = async (req, res) => {
 
     if (title === undefined || title === "" || title === null)
       return res.status(400).json({ message: "title no debe estar vacio" });
+
+    if (description === undefined || description === "")
+      return res
+        .status(400)
+        .json({ message: "description no debe estar vacio" });
+    if (typeof isComplete !== "boolean")
+      return res.status(400).json({ message: "isComplete debe ser booleano" });
+
     if (title.length > 100)
       return res
         .status(400)
@@ -29,13 +41,6 @@ export const postTask = async (req, res) => {
       return res
         .status(400)
         .json({ message: "la descripcion no debe ser mayor a 100 caracteres" });
-
-    if (description === undefined || description === "")
-      return res
-        .status(400)
-        .json({ message: "description no debe estar vacio" });
-    if (typeof isComplete !== "boolean")
-      return res.status(400).json({ message: "isComplete debe ser booleano" });
 
     const CrearUnaTarea = await TaskModel.create(req.body);
     return res.status(200).json(CrearUnaTarea);
@@ -47,9 +52,21 @@ export const postTask = async (req, res) => {
 };
 export const getAllTask = async (req, res) => {
   try {
-    const traerTodasLasTareas = await TaskModel.findAll();
+    const traerTodasLasTareas = await TaskModel.findAll({
+      attributes: {
+        exclude: ["user_id"],
+      },
+      include: [
+        {
+          model: UserModel,
+          as: "user",
+          attributes: { exclude: ["password"] },
+        },
+      ],
+    });
     return res.status(302).json(traerTodasLasTareas);
   } catch (error) {
+    console.error(error);
     return res
       .status(400)
       .json({ message: "Error al tratar de traer todas las tareas" });
