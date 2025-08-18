@@ -13,7 +13,14 @@ export const postUserCourse = async (req, res) => {
 
 export const getAllUserCourse = async (req, res) => {
   try {
-    const findAllUserCourses = await courseUserModel.findAll();
+    const findAllUserCourses = await courseUserModel.findAll({
+      includes: [
+        {
+          model: "course",
+          attributes: { exclude: ["createdAt", "updatedAt"] },
+        },
+      ],
+    });
     return res.status(302).json(findAllUserCourses);
   } catch (error) {
     return res

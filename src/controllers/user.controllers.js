@@ -1,5 +1,4 @@
 import UserModel from "../models/user.model.js";
-import sequelize, { Op, where } from "sequelize";
 
 export const postUser = async (req, res) => {
   if (req.body) {
