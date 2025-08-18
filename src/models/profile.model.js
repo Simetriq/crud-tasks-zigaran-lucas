@@ -1,5 +1,5 @@
 import sequelize from "../config/database.js";
-import { DataTypes, ForeignKeyConstraintError, Op } from "sequelize";
+import { DataTypes } from "sequelize";
 import UserModel from "./user.model.js";
 
 const ProfileModel = sequelize.define(
@@ -24,6 +24,6 @@ export default ProfileModel;
 
 //! Relacion de uno a uno, se crea la relacion en el modelo que depende del otro
 
-ProfileModel.hasOne(UserModel, { foreignKey: "user_id", as: "user" });
+ProfileModel.belongsTo(UserModel, { foreignKey: "user_id" });
 
-UserModel.hasOne(ProfileModel, { foreignKey: "profile_id", as: "profile" });
+UserModel.hasOne(ProfileModel, { foreignKey: "user_id" });

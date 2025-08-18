@@ -1,3 +1,4 @@
+import ProfileModel from "../models/profile.model.js";
 import TaskModel from "../models/task.model.js";
 import UserModel from "../models/user.model.js";
 
@@ -45,7 +46,18 @@ export const postUser = async (req, res) => {
 };
 export const getAllUser = async (req, res) => {
   try {
-    const traerTodasLosUsuarios = await UserModel.findAll();
+    const traerTodasLosUsuarios = await UserModel.findAll({
+      attributes: { exclude: ["password"] },
+      include: [
+        {
+          model: TaskModel,
+          attributes: { exclude: ["user_id", "id"] },
+        },
+        {
+          model: ProfileModel,
+        },
+      ],
+    });
     return res.status(302).json(traerTodasLosUsuarios);
   } catch (error) {
     return res
@@ -55,8 +67,19 @@ export const getAllUser = async (req, res) => {
 };
 export const getUserId = async (req, res) => {
   try {
-    const findUserId = UserModel.findByPk(req.params.id);
-    return res.status(302).json(findUserId);
+    const findUserId = await UserModel.findByPk(req.params.id, {
+      attributes: { exclude: ["password"] },
+      include: [
+        {
+          model: TaskModel,
+          attributes: { exclude: ["user_id", "id"] },
+        },
+        {
+          model: ProfileModel,
+        },
+      ],
+    });
+    return res.status(200).json(findUserId);
   } catch (error) {
     return res
       .status(400)

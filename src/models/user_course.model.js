@@ -22,14 +22,20 @@ export default CourseUserModel;
 
 //! esta es la tabla intermedia en donde se debe realizar la relacion
 
-UserModel.belongsToMany(CourseModel, {
-  through: CourseUserModel,
-  foreignKey: "user_id",
-  as: "roles",
-});
+// UserModel.belongsToMany(CourseModel, {
+//   through: CourseUserModel,
+//   foreignKey: "user_id",
+//   as: "roles",
+// });
 
-CourseModel.belongsToMany(UserModel, {
-  through: CourseUserModel,
-  foreignKey: "role_id",
-  as: "users",
-});
+// CourseModel.belongsToMany(UserModel, {
+//   through: CourseUserModel,
+//   foreignKey: "role_id",
+//   as: "users",
+// });
+
+CourseUserModel.belongsTo(UserModel, { foreignKey: "user_model_id" });
+CourseUserModel.belongsTo(CourseModel, { foreignKey: "course_model_id" });
+
+UserModel.hasMany(CourseUserModel, { foreignKey: "user_model_id" });
+CourseModel.hasMany(CourseUserModel, { foreignKey: "course_model_id" });
