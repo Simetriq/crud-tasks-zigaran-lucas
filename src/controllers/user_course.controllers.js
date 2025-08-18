@@ -13,6 +13,8 @@ export const postUserCourse = async (req, res) => {
 
 export const getAllUserCourse = async (req, res) => {
   try {
+    const findAllUserCourses = await courseUserModel.findAll();
+    return res.status(302).json(findAllUserCourses);
   } catch (error) {
     return res
       .status(400)
