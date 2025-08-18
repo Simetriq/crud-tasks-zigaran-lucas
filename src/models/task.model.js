@@ -27,6 +27,10 @@ const TaskModel = sequelize.define(
 export default TaskModel;
 
 //!Relaciones de uno a muchos
+//! debes definir la relación en ambos modelos para que Sequelize
+//! funcione correctamente, pero cada declaración tiene un propósito distinto
+//? one to many la relacion va en el modelo de Many, ejemplo user y task
+//? la relacion va en task, asi evitamos que se repita el user en la base de datos.
 
 TaskModel.belongsTo(UserModel, { foreignKey: "user_id", as: "user" });
 

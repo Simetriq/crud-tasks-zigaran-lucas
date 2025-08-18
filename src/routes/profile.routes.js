@@ -6,7 +6,7 @@ import {
 
 const routesProfile = express.Router();
 
-routesProfile.post("/tasks", post_profile);
-routesProfile.get("/tasks/:id", get_profile);
+routesProfile.post("/profile", post_profile);
+routesProfile.get("/profile/:id", get_profile);
 
 export default routesProfile;

@@ -2,17 +2,23 @@ import sequelize from "../config/database.js";
 import { DataTypes, ForeignKeyConstraintError, Op } from "sequelize";
 import UserModel from "./user.model.js";
 
-const ProfileModel = sequelize.define("Profile", {
-  name: {
-    type: DataTypes.STRING(100),
-    allowNull: false,
+const ProfileModel = sequelize.define(
+  "Profile",
+  {
+    name: {
+      type: DataTypes.STRING(100),
+      allowNull: false,
+    },
+    rol: {
+      type: DataTypes.STRING(100),
+      unique: true,
+      allowNull: false,
+    },
   },
-  rol: {
-    type: DataTypes.STRING(100),
-    unique: true,
-    allowNull: false,
-  },
-});
+  {
+    timestamps: false,
+  }
+);
 
 export default ProfileModel;
 

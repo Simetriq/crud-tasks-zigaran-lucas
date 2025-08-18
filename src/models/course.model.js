@@ -1,17 +1,23 @@
 import sequelize from "../config/database.js";
 import { DataTypes, ForeignKeyConstraintError, Op } from "sequelize";
 
-const course_model = sequelize.define("Course", {
-  name: {
-    type: DataTypes.STRING(100),
-    allowNull: false,
+const course_model = sequelize.define(
+  "Course",
+  {
+    course: {
+      type: DataTypes.STRING(100),
+      allowNull: false,
+    },
+    year: {
+      type: DataTypes.STRING(100),
+      unique: true,
+      allowNull: false,
+    },
   },
-  rol: {
-    type: DataTypes.STRING(100),
-    unique: true,
-    allowNull: false,
-  },
-});
+  {
+    timestamps: false,
+  }
+);
 
 export default course_model;
 

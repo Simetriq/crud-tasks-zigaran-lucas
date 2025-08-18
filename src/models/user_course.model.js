@@ -1,29 +1,35 @@
 import sequelize from "../config/database.js";
-import { DataTypes, ForeignKeyConstraintError, Op } from "sequelize";
+import { DataTypes } from "sequelize";
 import UserModel from "./user.model.js";
+import course_model from "./course.model.js";
 
-const course_user_model = sequelize.define("Course", {
-  name: {
-    type: DataTypes.STRING(100),
-    allowNull: false,
+const courseUserModel = sequelize.define(
+  "Course",
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+      allowNull: false,
+    },
   },
-  rol: {
-    type: DataTypes.STRING(100),
-    unique: true,
-    allowNull: false,
-  },
-});
+  {
+    timestamps: false,
+  }
+);
 
-export default course_user_model;
+export default courseUserModel;
 
 //! esta es la tabla intermedia en donde se debe realizar la relacion
 
-course_user_model.BelongsToMany(UserModel, {
+UserModel.BelongsToMany(course_model, {
+  through: `courseUserModel`,
   foreignKey: "course_user_id",
-  as: "course_user",
+  as: "user_id",
 });
 
-UserModel.BelongsToMany(course_user_model, {
+course_model.BelongsToMany(UserModel, {
+  through: `courseUserModel`,
   foreignKey: "user_id",
-  as: "user",
+  as: "course_id",
 });
