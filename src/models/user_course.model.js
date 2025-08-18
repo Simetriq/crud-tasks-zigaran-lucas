@@ -4,7 +4,7 @@ import UserModel from "./user.model.js";
 import CourseModel from "./course.model.js";
 
 const CourseUserModel = sequelize.define(
-  "Course",
+  "UserCourses",
   {
     id: {
       type: DataTypes.INTEGER,

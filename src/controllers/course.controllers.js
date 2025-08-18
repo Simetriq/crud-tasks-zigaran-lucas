@@ -2,8 +2,8 @@ import CourseModel from "../models/course.model.js";
 
 export const PostCourse = async (req, res) => {
   try {
-    const CrearUnCurso = await CourseModel.create(req.body);
-    return res.status(200).json(CrearUnCurso);
+    const CreateCourse = await CourseModel.create(req.body);
+    return res.status(200).json(CreateCourse);
   } catch (error) {
     return res
       .status(400)
