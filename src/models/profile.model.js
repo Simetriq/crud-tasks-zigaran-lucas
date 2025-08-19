@@ -3,7 +3,7 @@ import { DataTypes } from "sequelize";
 import UserModel from "./user.model.js";
 
 const ProfileModel = sequelize.define(
-  "Profile",
+  "profile",
   {
     name: {
       type: DataTypes.STRING(100),

@@ -1,7 +1,7 @@
 import express from "express";
 import {
   postUser,
-  getAllUser,
+  GetAllUsers,
   getUserId,
   putUser,
   deleteUser,
@@ -9,10 +9,10 @@ import {
 
 const routesUser = express.Router();
 
-routesUser.post("/users", postUser);
-routesUser.get("/users", getAllUser);
-routesUser.get("/users/:id", getUserId);
-routesUser.put("/users/:id", putUser);
-routesUser.delete("/users/:id", deleteUser);
+routesUser.post("/user", postUser);
+routesUser.get("/user", GetAllUsers);
+routesUser.get("/user/:id", getUserId);
+routesUser.put("/user/:id", putUser);
+routesUser.delete("/user/:id", deleteUser);
 
 export default routesUser;
