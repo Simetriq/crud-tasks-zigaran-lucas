@@ -2,7 +2,7 @@ import sequelize from "../config/database.js";
 import { DataTypes } from "sequelize";
 
 const CourseModel = sequelize.define(
-  "Course",
+  "course",
   {
     course: {
       type: DataTypes.STRING(100),

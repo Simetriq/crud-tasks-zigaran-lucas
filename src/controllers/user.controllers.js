@@ -13,7 +13,7 @@ export const postUser = async (req, res) => {
 
   try {
     const { name, email, password } = req.body;
-    const emailUnico = await UserModel.findOne({ where: { name } });
+    const emailUnico = await UserModel.findOne({ where: { email } });
     if (emailUnico)
       return res.status(400).json({ message: "este email ya esta registrado" });
 
@@ -44,21 +44,22 @@ export const postUser = async (req, res) => {
       .json({ message: "Error al tratar de crear un usuario" });
   }
 };
-export const getAllUser = async (req, res) => {
+export const GetAllUsers = async (req, res) => {
   try {
-    const traerTodasLosUsuarios = await UserModel.findAll({
+    const GetUsers = await UserModel.findAll({
       attributes: { exclude: ["password"] },
       include: [
         {
           model: TaskModel,
-          attributes: { exclude: ["user_id", "id"] },
+          as: "tasks",
         },
         {
           model: ProfileModel,
+          as: "profile",
         },
       ],
     });
-    return res.status(302).json(traerTodasLosUsuarios);
+    return res.status(200).json(GetUsers);
   } catch (error) {
     return res
       .status(400)
@@ -99,9 +100,7 @@ export const putUser = async (req, res) => {
 
     if (updateUserById) {
       const taskActualizado = await TaskModel.findById(req.params.id);
-      return res
-        .status(200)
-        .json({ message: `Se actualizo exitosamente el usuario` });
+      return res.status(200).json(taskActualizado);
     } else {
       return res.status(404).json({
         message: `No se encontro el usuario que se quiere actualizar`,
@@ -116,6 +115,19 @@ export const putUser = async (req, res) => {
 export const deleteUser = async (req, res) => {
   try {
   } catch (error) {
+    const deleteUser = await UserModel.destroy({
+      where: { id: req.params.id },
+    });
+    if (deleteUser) {
+      return res
+        .status(200)
+        .json({ message: `Se elimino exitosamente el usuario` });
+    } else {
+      return res.status(404).json({
+        message: `No se encontro el usuario que se quiere eliminar`,
+      });
+    }
+
     return res
       .status(400)
       .json({ message: "Error al tratar de borrar un usuario" });

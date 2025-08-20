@@ -3,7 +3,7 @@ import { DataTypes } from "sequelize";
 import UserModel from "./user.model.js";
 
 const TaskModel = sequelize.define(
-  "Tasks",
+  "tasks",
   {
     title: {
       type: DataTypes.STRING(100),

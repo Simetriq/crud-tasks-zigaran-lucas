@@ -15,8 +15,13 @@ export const postTask = async (req, res) => {
   }
 
   try {
-    const { title, description, isComplete } = req.body;
+    const { title, description, is_complete, user_id } = req.body;
 
+    if (!user_id)
+      return res.status(400).json({ Message: "El usuario debe existir" });
+    const userExists = await UserModel.findByPk(user_id);
+    if (!userExists)
+      return res.status(404).json({ message: "Usuario no encontrado" });
     const titleUnico = await TaskModel.findOne({ where: { title } });
     if (titleUnico)
       return res
@@ -30,8 +35,8 @@ export const postTask = async (req, res) => {
       return res
         .status(400)
         .json({ message: "description no debe estar vacio" });
-    if (typeof isComplete !== "boolean")
-      return res.status(400).json({ message: "isComplete debe ser booleano" });
+    if (typeof is_complete !== "boolean")
+      return res.status(400).json({ message: "is_complete debe ser booleano" });
 
     if (title.length > 100)
       return res
@@ -114,10 +119,18 @@ export const updateTask = async (req, res) => {
 };
 export const deleteTask = async (req, res) => {
   try {
-    const deleteTaksById = await TaskModel.destroy({
+    const deleteTask = await TaskModel.destroy({
       where: { id: req.params.id },
     });
-    return res.status(200).json({ message: "Se borro exitosamente la tarea" });
+    if (deleteTask) {
+      return res
+        .status(200)
+        .json({ message: `Se elimino exitosamente la tarea` });
+    } else {
+      return res
+        .status(404)
+        .json({ message: `No se encontro la tarea que se quiere eliminar` });
+    }
   } catch (error) {
     return res
       .status(400)
