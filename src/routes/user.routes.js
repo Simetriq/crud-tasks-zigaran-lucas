@@ -3,8 +3,8 @@ import {
   postUser,
   GetAllUsers,
   getUserId,
-  putUser,
   deleteUser,
+  updateUser,
 } from "../controllers/user.controllers.js";
 
 const routesUser = express.Router();
@@ -12,7 +12,7 @@ const routesUser = express.Router();
 routesUser.post("/user", postUser);
 routesUser.get("/user", GetAllUsers);
 routesUser.get("/user/:id", getUserId);
-routesUser.put("/user/:id", putUser);
+routesUser.put("/user/:id", updateUser);
 routesUser.delete("/user/:id", deleteUser);
 
 export default routesUser;
