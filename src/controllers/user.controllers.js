@@ -87,15 +87,15 @@ export const getUserId = async (req, res) => {
       .json({ message: "Error al tratar de traer un usuario por id" });
   }
 };
-export const putUser = async (req, res) => {
+export const updateUser = async (req, res) => {
   try {
-    const [updateTaskById] = await TaskModel.update(req.body, {
+    const [updateUserById] = await UserModel.update(req.body, {
       where: { id: req.params.id },
     });
 
-    if (updateTaskById) {
-      const taskActualizado = await TaskModel.findById(req.params.id);
-      return res.status(200).json(taskActualizado);
+    if (updateUserById) {
+      const userActualizado = await TaskModel.findById(req.params.id);
+      return res.status(200).json(userActualizado);
     } else {
       return res.status(404).json({
         message: `No se encontro el usuario que se quiere actualizar`,

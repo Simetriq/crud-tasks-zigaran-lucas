@@ -76,7 +76,7 @@ export const getAllTask = async (req, res) => {
 };
 export const getTaskporId = async (req, res) => {
   try {
-    const findTaskById = await TaskModel.findTaskById(req.params.id);
+    const findTaskById = await TaskModel.findByPk(req.params.id);
     return res.status(200).json(findTaskById);
   } catch (error) {
     return res
