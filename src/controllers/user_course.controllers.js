@@ -1,5 +1,3 @@
-import CourseModel from "../models/course.model.js";
-import UserModel from "../models/user.model.js";
 import courseUserModel from "../models/user_course.model.js";
 
 export const postUserCourse = async (req, res) => {
@@ -12,7 +10,6 @@ export const postUserCourse = async (req, res) => {
       .json({ message: "error al tratar de ejecutar postUserCourse" });
   }
 };
-
 export const getAllUserCourse = async (req, res) => {
   try {
     const getAllUserCourse = await courseUserModel.findAll({
@@ -53,5 +50,47 @@ export const getUserCourseById = async (req, res) => {
     return res
       .status(400)
       .json({ message: "error al tratar de buscar un curso por id" });
+  }
+};
+export const deleteUserCourse = async (req, res) => {
+  try {
+    const deleteUserCourseById = await courseUserModel.destroy({
+      where: { id: req.params.id },
+    });
+    if (deleteUserCourseById)
+      return res
+        .status(200)
+        .json({ message: "El curso del usuario se a eliminado correctamente" });
+    else {
+      return res
+        .status(400)
+        .json({ message: "Error al tratar de eliminar un curso del usuario" });
+    }
+  } catch (error) {
+    return res
+      .status(400)
+      .json({ message: "Error al tratar de eliminar un curso del usuario" });
+  }
+};
+export const updateUserCourse = async (req, res) => {
+  try {
+    const [updateUserCourseById] = await courseUserModel.update(req.body, {
+      where: { id: req.params.id },
+    });
+
+    if (updateUserCourseById) {
+      const userCourseActualizado = await courseUserModel.findByPk(
+        req.params.id
+      );
+      return res.status(200).json(userCourseActualizado);
+    } else {
+      return res.status(404).json({
+        message: `No se encontro el curso del usuario que se quiere actualizar`,
+      });
+    }
+  } catch (error) {
+    return res
+      .status(400)
+      .json({ message: "Error al tratar de actualizar un curso del usuario" });
   }
 };
