@@ -1,5 +1,5 @@
 import CourseModel from "../models/course.model.js";
-import { Op, where } from "sequelize";
+import sequelize from "sequelize";
 
 export const PostCourse = async (req, res) => {
   try {
@@ -50,5 +50,25 @@ export const updateCourse = async (req, res) => {
     return res
       .status(400)
       .json({ message: "error en la peticion de actualizacion de user" });
+  }
+};
+export const deleteUser = async (req, res) => {
+  try {
+    const deleteUserById = await UserModel.destroy({
+      where: { id: req.params.id },
+    });
+    if (deleteUserById)
+      return res
+        .status(200)
+        .json({ message: "se a eliminado el usuario correctamente" });
+    else {
+      return res
+        .status(404)
+        .json({ message: "No se encontro el usuario que se quiere eliminar" });
+    }
+  } catch (error) {
+    return res
+      .status(400)
+      .json({ message: "Error al tratar de eliminar un usuario" });
   }
 };
