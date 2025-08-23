@@ -1,5 +1,4 @@
 import ProfileModel from "../models/profile.model.js";
-import UserModel from "../models/user.model.js";
 
 export const postProfile = async (req, res) => {
   try {
