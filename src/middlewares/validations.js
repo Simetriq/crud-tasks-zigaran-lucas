@@ -160,6 +160,14 @@ export const taskValidations = () => {
   ];
 };
 
+export const userCourseValidation = () => {
+  getAllUserCoursesValidation: [
+    param("id")
+      .isInt({ min: 1 })
+      .withMessage(`ID debe ser un numero entero positivo`)
+      .toInt(),
+  ];
+};
 //! =====================================================================
 //? ============= Manejo de Errores atravez de mensajes =================
 //! =====================================================================
