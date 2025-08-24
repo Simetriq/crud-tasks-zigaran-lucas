@@ -3,6 +3,9 @@ import sequelize from "sequelize";
 
 export const PostCourse = async (req, res) => {
   try {
+    const { course, year } = req.params;
+    if (course) return res.status(400).json({ message: `el curso ya existe` });
+    if (year) return res.status(400).json({ message: "Este año ya existe " });
     const CreateCourse = await CourseModel.create(req.body);
     return res.status(200).json(CreateCourse);
   } catch (error) {
