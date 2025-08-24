@@ -1,4 +1,6 @@
 import express from "express";
+import { postUserValidations } from "../middlewares/validations.js";
+
 import {
   postUser,
   GetAllUsers,
@@ -9,7 +11,7 @@ import {
 
 const routesUser = express.Router();
 
-routesUser.post("/user", postUser);
+routesUser.post("/user", postUserValidations, postUser);
 routesUser.get("/user", GetAllUsers);
 routesUser.get("/user/:id", getUserId);
 routesUser.put("/user/:id", updateUser);
