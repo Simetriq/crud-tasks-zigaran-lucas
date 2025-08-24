@@ -1,39 +1,7 @@
 import UserModel from "../models/user.model.js";
 
 export const postUser = async (req, res) => {
-  if (req.body) {
-    for (let value in req.body) {
-      if (typeof req.body[value] === "string") {
-        req.body[value] = req.body[value].trim();
-      }
-    }
-  }
-
   try {
-    const { name, email, password } = req.body;
-    const emailUnico = await UserModel.findOne({ where: { email } });
-    if (emailUnico)
-      return res.status(400).json({ message: "este email ya esta registrado" });
-
-    if (name === undefined || name === "" || name === null)
-      return res.status(400).json({ message: "name no debe estar vacio" });
-    if (email === undefined || email === "")
-      return res.status(400).json({ message: "email no debe estar vacio" });
-    if (password === undefined || password === "")
-      return res.status(400).json({ message: "password no debe estar vacio" });
-    if (name.length > 100)
-      return res
-        .status(400)
-        .json({ message: "el nombre no debe ser mayor a 100 caracteres" });
-    if (email.length > 100)
-      return res
-        .status(400)
-        .json({ message: "el email no debe ser mayor a 100 caracteres" });
-    if (password.length > 100)
-      return res
-        .status(400)
-        .json({ message: "la contraseña no debe ser mayor a 100 caracteres" });
-
     const crearUnUsuario = await UserModel.create(req.body);
     return res.status(200).json(crearUnUsuario);
   } catch (error) {
@@ -90,7 +58,6 @@ export const updateUser = async (req, res) => {
     const [updateUserById] = await UserModel.update(req.body, {
       where: { id: req.params.id },
     });
-
     if (updateUserById) {
       const userActualizado = await TaskModel.findById(req.params.id);
       return res.status(200).json(userActualizado);
@@ -107,20 +74,10 @@ export const updateUser = async (req, res) => {
 };
 export const deleteUser = async (req, res) => {
   try {
-  } catch (error) {
     const deleteUser = await UserModel.destroy({
       where: { id: req.params.id },
     });
-    if (deleteUser) {
-      return res
-        .status(200)
-        .json({ message: `Se elimino exitosamente el usuario` });
-    } else {
-      return res.status(404).json({
-        message: `No se encontro el usuario que se quiere eliminar`,
-      });
-    }
-
+  } catch (error) {
     return res
       .status(400)
       .json({ message: "Error al tratar de borrar un usuario" });
