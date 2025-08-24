@@ -22,7 +22,7 @@ export const userValidations = () => {
       .withMessage(`ID debe ser un numero entero positivo`)
       .toInt(),
   ];
-  AllUserValidation: [
+  userByIdValidation: [
     param("id")
       .isInt({ min: 1 })
       .withMessage(`ID debe ser un numero entero positivo`)
@@ -69,6 +69,12 @@ export const courseValidations = () => {
       .withMessage(`ID debe ser un numero entero positivo`)
       .toInt(),
   ];
+  getCoursesByIdValidation: [
+    param("id")
+      .isInt({ min: 1 })
+      .withMessage(`ID debe ser un numero entero positivo`)
+      .toInt(),
+  ];
 };
 
 export const profileValidations = () => {
@@ -97,6 +103,12 @@ export const profileValidations = () => {
       .toInt(),
   ];
   allProfilesValidation: [
+    param("id")
+      .isInt({ min: 1 })
+      .withMessage(`ID debe ser un numero entero positivo`)
+      .toInt(),
+  ];
+  getProfileByIdValidation: [
     param("id")
       .isInt({ min: 1 })
       .withMessage(`ID debe ser un numero entero positivo`)
@@ -158,10 +170,21 @@ export const taskValidations = () => {
       .withMessage(`ID debe ser un numero entero positivo`)
       .toInt(),
   ];
+  getTaskValidation: [
+    param("id")
+      .isInt({ min: 1 })
+      .withMessage(`ID debe ser un numero entero positivo`)
+      .toInt(),
+  ];
 };
-
 export const userCourseValidation = () => {
   getAllUserCoursesValidation: [
+    param("id")
+      .isInt({ min: 1 })
+      .withMessage(`ID debe ser un numero entero positivo`)
+      .toInt(),
+  ];
+  getUserCoursesById: [
     param("id")
       .isInt({ min: 1 })
       .withMessage(`ID debe ser un numero entero positivo`)
