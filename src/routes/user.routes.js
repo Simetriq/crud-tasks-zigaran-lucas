@@ -1,6 +1,4 @@
 import express from "express";
-import { userValidations } from "../middlewares/validations.js";
-
 import {
   postUser,
   GetAllUsers,
@@ -8,19 +6,18 @@ import {
   deleteUser,
   updateUser,
 } from "../controllers/user.controllers.js";
+import controller from "../middlewares/errorHandler.js";
+import {
+  createUser,
+  deleteUserValidation,
+  updateUserValidation,
+  userByIdValidation,
+} from "../middlewares/validations/user.validations.js";
 
 const routesUser = express.Router();
 
-const {
-  createUser,
-  allUserValidation,
-  updateUserValidation,
-  deleteUserValidation,
-  userByIdValidation,
-} = userValidations;
-
 routesUser.post("/user", createUser, postUser);
-routesUser.get("/user", allUserValidation, GetAllUsers);
+routesUser.get("/user", controller, GetAllUsers);
 routesUser.get("/user/:id", userByIdValidation, getUserId);
 routesUser.put("/user/:id", updateUserValidation, updateUser);
 routesUser.delete("/user/:id", deleteUserValidation, deleteUser);

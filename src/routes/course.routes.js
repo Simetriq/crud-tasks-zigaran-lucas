@@ -6,22 +6,35 @@ import {
   updateCourse,
   deleteUser,
 } from "../controllers/course.controllers.js";
-import { courseValidations } from "../middlewares/validations.js";
+import {
+  courseValidations,
+  deleteCourseValidation,
+  updateCourseValidation,
+  getCoursesByIdValidation,
+} from "../middlewares/validations/course.validations.js";
+import controller from "../middlewares/errorHandler.js";
 
 const CourseRoutes = express.Router();
 
-const {
-  AllCoursesValidation,
-  createCourseValidation,
-  deleteCourseValidation,
+CourseRoutes.post("/course", courseValidations, controller, PostCourse);
+CourseRoutes.get(
+  "/course/:id",
   getCoursesByIdValidation,
+  controller,
+  getCourseById
+);
+CourseRoutes.get("/course", GetCourse);
+CourseRoutes.put(
+  "/course/:id",
   updateCourseValidation,
-} = courseValidations;
-
-CourseRoutes.post("/course", createCourseValidation, PostCourse);
-CourseRoutes.get("/course/:id", getCoursesByIdValidation, getCourseById);
-CourseRoutes.get("/course", AllCoursesValidation, GetCourse);
-CourseRoutes.put("/course/:id", updateCourseValidation, updateCourse);
-CourseRoutes.delete("/course/:id", deleteCourseValidation, deleteUser);
+  controller,
+  updateCourse
+);
+CourseRoutes.delete(
+  "/course/:id",
+  deleteCourseValidation,
+  controller,
+  deleteUser
+);
 
 export default CourseRoutes;

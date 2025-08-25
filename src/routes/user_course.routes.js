@@ -6,37 +6,39 @@ import {
   postUserCourse,
   updateUserCourse,
 } from "../controllers/user_course.controllers.js";
-import { userCourseValidation } from "../middlewares/validations.js";
-
-const routesUserCourse = express.Router();
-
-const {
-  getAllUserCoursesValidation,
-  getUserCoursesById,
+import {
   createUserCourseValidation,
   deleteUserCourseValidation,
+  getUserCoursesById,
   updateUserCourseValidation,
-} = userCourseValidation;
+} from "../middlewares/validations/userCourseValidation.js";
+import controller from "../middlewares/errorHandler.js";
+
+const routesUserCourse = express.Router();
 
 routesUserCourse.post(
   "/userCourse",
   createUserCourseValidation,
+  controller,
   postUserCourse
 );
+routesUserCourse.get("/userCourse", controller, getAllUserCourse);
 routesUserCourse.get(
-  "/userCourse",
-  getAllUserCoursesValidation,
-  getAllUserCourse
+  "/userCourses/:id",
+  getUserCoursesById,
+  controller,
+  getUserCourseById
 );
-routesUserCourse.get("/userCourses/:id", getUserCoursesById, getUserCourseById);
 routesUserCourse.put(
   "/userCourses/:id",
   updateUserCourseValidation,
+  controller,
   updateUserCourse
 );
 routesUserCourse.delete(
   "/userCourses/:id",
   deleteUserCourseValidation,
+  controller,
   deleteUserCourse
 );
 

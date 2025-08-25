@@ -6,22 +6,20 @@ import {
   updateTask,
   deleteTask,
 } from "../controllers/task.controllers.js";
-import { taskValidations } from "../middlewares/validations.js";
+import controller from "../middlewares/errorHandler.js";
+import {
+  createTaskValidation,
+  deleteTaskValidation,
+  getTaskValidation,
+  updateTaskValidation,
+} from "../middlewares/validations/task.validations.js";
 
 const routesTask = express.Router();
 
-const {
-  createTaskValidation,
-  deleteTaskValidation,
-  getAllTaskValidation,
-  getTaskValidation,
-  updateTaskValidation,
-} = taskValidations;
-
-routesTask.post("/tasks", createTaskValidation, postTask);
-routesTask.get("/tasks", getTaskValidation, getAllTask);
-routesTask.get("/tasks/:id", getAllTaskValidation, getTaskporId);
-routesTask.put("/tasks/:id", updateTaskValidation, updateTask);
-routesTask.delete("/tasks/:id", deleteTaskValidation, deleteTask);
+routesTask.post("/tasks", createTaskValidation, controller, postTask);
+routesTask.get("/tasks", getTaskValidation, controller, getAllTask);
+routesTask.get("/tasks/:id", controller, getTaskporId);
+routesTask.put("/tasks/:id", updateTaskValidation, controller, updateTask);
+routesTask.delete("/tasks/:id", deleteTaskValidation, controller, deleteTask);
 
 export default routesTask;

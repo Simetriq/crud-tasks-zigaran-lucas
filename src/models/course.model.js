@@ -10,7 +10,6 @@ const CourseModel = sequelize.define(
     },
     year: {
       type: DataTypes.STRING(100),
-      unique: true,
       allowNull: false,
     },
   },
