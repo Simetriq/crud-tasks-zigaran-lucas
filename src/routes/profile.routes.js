@@ -6,15 +6,17 @@ import {
   updateProfile,
   deleteProfile,
 } from "../controllers/profile.controllers.js";
-import {
-  createProfileValidation,
-  updateProfileValidation,
-  deleteProfileValidation,
-  allProfilesValidation,
-  getProfileByIdValidation,
-} from "../middlewares/validations.js";
+import { profileValidations } from "../middlewares/validations.js";
 
 const routesProfile = Router();
+
+const {
+  allProfilesValidation,
+  createProfileValidation,
+  deleteProfileValidation,
+  getProfileByIdValidation,
+  updateProfileValidation,
+} = profileValidations;
 
 routesProfile.post("/profile", createProfileValidation, postProfile);
 routesProfile.get("/profile/:id", getProfileByIdValidation, getProfile);

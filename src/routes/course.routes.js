@@ -6,15 +6,17 @@ import {
   updateCourse,
   deleteUser,
 } from "../controllers/course.controllers.js";
-import {
-  createCourseValidation,
-  deleteCourseValidation,
-  updateCourseValidation,
-  AllCoursesValidation,
-  getCoursesByIdValidation,
-} from "../middlewares/validations.js";
+import { courseValidations } from "../middlewares/validations.js";
 
 const CourseRoutes = express.Router();
+
+const {
+  AllCoursesValidation,
+  createCourseValidation,
+  deleteCourseValidation,
+  getCoursesByIdValidation,
+  updateCourseValidation,
+} = courseValidations;
 
 CourseRoutes.post("/course", createCourseValidation, PostCourse);
 CourseRoutes.get("/course/:id", getCoursesByIdValidation, getCourseById);

@@ -1,12 +1,11 @@
-import { body, param, query } from "express-validator";
-import { validationResult } from "express-validator";
+import { body, param } from "express-validator";
 
-export const userValidations = () => {
+export const userValidations = {
   createUser: [
     body("name").notEmpty().isLength({ min: 2, max: 50 }).trim().escape(),
     body("email").isEmail().withMessage("Email invalido").normalizeEmail(),
     body("password").isLength({ min: 6 }).matches(/\d/),
-  ];
+  ],
   updateUserValidation: [
     body("name").optional().isLength({ min: 2, max: 50 }).trim().escape(),
     body("email")
@@ -15,22 +14,28 @@ export const userValidations = () => {
       .withMessage("Email invalido")
       .normalizeEmail(),
     body("password").optional().isLength({ min: 6 }).matches(/\d/),
-  ];
+  ],
   deleteUserValidation: [
     param("id")
       .isInt({ min: 1 })
       .withMessage(`ID debe ser un numero entero positivo`)
       .toInt(),
-  ];
+  ],
   userByIdValidation: [
     param("id")
       .isInt({ min: 1 })
       .withMessage(`ID debe ser un numero entero positivo`)
       .toInt(),
-  ];
+  ],
+  allUserValidation: [
+    param("id")
+      .isInt({ min: 1 })
+      .withMessage(`ID debe ser un numero entero positivo`)
+      .toInt(),
+  ],
 };
 
-export const courseValidations = () => {
+export const courseValidations = {
   createCourseValidation: [
     body("course").notEmpty().isLength({ min: 2, max: 100 }).trim().escape(),
     body("year")
@@ -40,13 +45,13 @@ export const courseValidations = () => {
       .trim()
       .withMessage(`year debe ser entero positivo`)
       .escape(),
-  ];
+  ],
   deleteCourseValidation: [
     param("id")
       .isInt({ min: 1 })
       .withMessage(`ID debe ser un numero entero positivo`)
       .toInt(),
-  ];
+  ],
   updateCourseValidation: [
     body("course")
       .optional()
@@ -62,26 +67,26 @@ export const courseValidations = () => {
       .trim()
       .withMessage(`year debe ser entero positivo`)
       .escape(),
-  ];
+  ],
   AllCoursesValidation: [
     param("id")
       .isInt({ min: 1 })
       .withMessage(`ID debe ser un numero entero positivo`)
       .toInt(),
-  ];
+  ],
   getCoursesByIdValidation: [
     param("id")
       .isInt({ min: 1 })
       .withMessage(`ID debe ser un numero entero positivo`)
       .toInt(),
-  ];
+  ],
 };
 
-export const profileValidations = () => {
+export const profileValidations = {
   createProfileValidation: [
     body("name").notEmpty().isLength({ min: 2, max: 50 }).trim().escape(),
     body("rol").notEmpty().isLength({ min: 2, max: 50 }).trim().escape(),
-  ];
+  ],
   updateProfileValidation: [
     body("name")
       .optional()
@@ -95,28 +100,28 @@ export const profileValidations = () => {
       .isLength({ min: 2, max: 50 })
       .trim()
       .escape(),
-  ];
+  ],
   deleteProfileValidation: [
     param("id")
       .isInt({ min: 1 })
       .withMessage(`ID debe ser un numero entero positivo`)
       .toInt(),
-  ];
+  ],
   allProfilesValidation: [
     param("id")
       .isInt({ min: 1 })
       .withMessage(`ID debe ser un numero entero positivo`)
       .toInt(),
-  ];
+  ],
   getProfileByIdValidation: [
     param("id")
       .isInt({ min: 1 })
       .withMessage(`ID debe ser un numero entero positivo`)
       .toInt(),
-  ];
+  ],
 };
 
-export const taskValidations = () => {
+export const taskValidations = {
   createTaskValidation: [
     body("title")
       .notEmpty()
@@ -135,7 +140,7 @@ export const taskValidations = () => {
       .isBoolean()
       .withMessage("Debe ser booleano")
       .escape(),
-  ];
+  ],
   updateTaskValidation: [
     body("title")
       .optional()
@@ -157,40 +162,42 @@ export const taskValidations = () => {
       .isBoolean()
       .withMessage("Debe ser booleano")
       .escape(),
-  ];
+  ],
   deleteTaskValidation: [
     param("id")
       .isInt({ min: 1 })
       .withMessage(`ID debe ser un numero entero positivo`)
       .toInt(),
-  ];
+  ],
   getAllTaskValidation: [
     param("id")
       .isInt({ min: 1 })
       .withMessage(`ID debe ser un numero entero positivo`)
       .toInt(),
-  ];
+  ],
   getTaskValidation: [
     param("id")
       .isInt({ min: 1 })
       .withMessage(`ID debe ser un numero entero positivo`)
       .toInt(),
-  ];
+  ],
 };
-export const userCourseValidation = () => {
+
+export const userCourseValidation = {
   getAllUserCoursesValidation: [
     param("id")
       .isInt({ min: 1 })
       .withMessage(`ID debe ser un numero entero positivo`)
       .toInt(),
-  ];
+  ],
   getUserCoursesById: [
     param("id")
       .isInt({ min: 1 })
       .withMessage(`ID debe ser un numero entero positivo`)
       .toInt(),
-  ];
+  ],
 };
+
 //! =====================================================================
 //? ============= Manejo de Errores atravez de mensajes =================
 //! =====================================================================

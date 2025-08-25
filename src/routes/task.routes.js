@@ -6,15 +6,17 @@ import {
   updateTask,
   deleteTask,
 } from "../controllers/task.controllers.js";
-import {
+import { taskValidations } from "../middlewares/validations.js";
+
+const routesTask = express.Router();
+
+const {
   createTaskValidation,
-  updateTaskValidation,
   deleteTaskValidation,
   getAllTaskValidation,
   getTaskValidation,
-} from "../middlewares/validations.js";
-
-const routesTask = express.Router();
+  updateTaskValidation,
+} = taskValidations;
 
 routesTask.post("/tasks", createTaskValidation, postTask);
 routesTask.get("/tasks", getTaskValidation, getAllTask);

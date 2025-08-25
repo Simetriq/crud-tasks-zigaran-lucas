@@ -1,11 +1,5 @@
 import express from "express";
-import {
-  createUser,
-  updateUserValidation,
-  deleteUserValidation,
-  allUserValidation,
-  userByIdValidation,
-} from "../middlewares/validations.js";
+import { userValidations } from "../middlewares/validations.js";
 
 import {
   postUser,
@@ -16,6 +10,14 @@ import {
 } from "../controllers/user.controllers.js";
 
 const routesUser = express.Router();
+
+const {
+  createUser,
+  allUserValidation,
+  updateUserValidation,
+  deleteUserValidation,
+  userByIdValidation,
+} = userValidations;
 
 routesUser.post("/user", createUser, postUser);
 routesUser.get("/user", allUserValidation, GetAllUsers);

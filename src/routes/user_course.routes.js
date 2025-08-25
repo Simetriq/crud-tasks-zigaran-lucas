@@ -6,12 +6,12 @@ import {
   postUserCourse,
   updateUserCourse,
 } from "../controllers/user_course.controllers.js";
-import {
-  getAllUserCoursesValidation,
-  getUserCoursesById,
-} from "../middlewares/validations.js";
+import { userCourseValidation } from "../middlewares/validations.js";
 
 const routesUserCourse = express.Router();
+
+const { getAllUserCoursesValidation, getUserCoursesById } =
+  userCourseValidation;
 
 routesUserCourse.post("/userCourse", postUserCourse);
 routesUserCourse.get(
