@@ -185,13 +185,51 @@ export const taskValidations = {
 
 export const userCourseValidation = {
   getAllUserCoursesValidation: [
-    param("id")
+    param("course_model_id")
+      .isInt({ min: 1 })
+      .withMessage(`ID debe ser un numero entero positivo`)
+      .toInt(),
+    param("user_model_id")
       .isInt({ min: 1 })
       .withMessage(`ID debe ser un numero entero positivo`)
       .toInt(),
   ],
   getUserCoursesById: [
-    param("id")
+    param("course_model_id")
+      .isInt({ min: 1 })
+      .withMessage(`ID debe ser un numero entero positivo`)
+      .toInt(),
+    param("user_model_id")
+      .isInt({ min: 1 })
+      .withMessage(`ID debe ser un numero entero positivo`)
+      .toInt(),
+  ],
+  createUserCourseValidation: [
+    param("course_model_id")
+      .isInt({ min: 1 })
+      .withMessage(`ID debe ser un numero entero positivo`)
+      .toInt(),
+    param("user_model_id")
+      .isInt({ min: 1 })
+      .withMessage(`ID debe ser un numero entero positivo`)
+      .toInt(),
+  ],
+  updateUserCourseValidation: [
+    param("course_model_id")
+      .isInt({ min: 1 })
+      .withMessage(`ID debe ser un numero entero positivo`)
+      .toInt(),
+    param("user_model_id")
+      .isInt({ min: 1 })
+      .withMessage(`ID debe ser un numero entero positivo`)
+      .toInt(),
+  ],
+  deleteUserCourseValidation: [
+    param("course_model_id")
+      .isInt({ min: 1 })
+      .withMessage(`ID debe ser un numero entero positivo`)
+      .toInt(),
+    param("user_model_id")
       .isInt({ min: 1 })
       .withMessage(`ID debe ser un numero entero positivo`)
       .toInt(),

@@ -2,24 +2,10 @@ import ProfileModel from "../models/profile.model.js";
 
 export const postProfile = async (req, res) => {
   try {
-    const { user_id } = req.body;
-
-    const userExist = await UserModel.findByPk(user_id);
-    if (!userExist)
-      return res.status(404).json({ message: "El usuario no existe" });
-
-    const userEqual = await ProfileModel.findOne({
-      where: { user_id: user_id },
-    });
-    if (userEqual)
-      return res.status(400).json({ message: "El perfil ya tiene un usuario" });
-
-    if (!user_id)
-      return res.status(400).json({ message: "El user_id no debe ser vacio" });
-
     const CrearUnPerfil = await ProfileModel.create(req.body);
     return res.status(200).json(CrearUnPerfil);
   } catch (error) {
+    console.log(error);
     return res
       .status(400)
       .json({ message: "Error al tratar de crear un perfil" });

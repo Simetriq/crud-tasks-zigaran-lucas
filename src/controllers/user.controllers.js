@@ -1,5 +1,6 @@
 import UserModel from "../models/user.model.js";
-
+import ProfileModel from "../models/profile.model.js";
+import TaskModel from "../models/task.model.js";
 export const postUser = async (req, res) => {
   try {
     const crearUnUsuario = await UserModel.create(req.body);
@@ -27,6 +28,7 @@ export const GetAllUsers = async (req, res) => {
     });
     return res.status(200).json(GetUsers);
   } catch (error) {
+    console.log(error);
     return res
       .status(400)
       .json({ message: "Error al tratar de traer todos los usuarios" });
@@ -77,6 +79,9 @@ export const deleteUser = async (req, res) => {
     const deleteUser = await UserModel.destroy({
       where: { id: req.params.id },
     });
+    return res
+      .status(204)
+      .json({ message: "Se elimino correctamente el usuario" });
   } catch (error) {
     return res
       .status(400)

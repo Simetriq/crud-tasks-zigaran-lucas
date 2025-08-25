@@ -21,6 +21,7 @@ const UserModel = sequelize.define(
   {
     paranoid: true,
     timestamps: false,
+    deletedAt: "deletedAt",
   }
 );
 

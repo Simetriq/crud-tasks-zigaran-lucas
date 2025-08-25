@@ -24,6 +24,9 @@ export default ProfileModel;
 
 //! Relacion de uno a uno, se crea la relacion en el modelo que depende del otro
 
-ProfileModel.belongsTo(UserModel, { foreignKey: "user_id" });
+ProfileModel.belongsTo(UserModel, {
+  foreignKey: "user_id",
+  onDelete: "CASCADE",
+});
 
-UserModel.hasOne(ProfileModel, { foreignKey: "user_id" });
+UserModel.hasOne(ProfileModel, { foreignKey: "user_id", onDelete: "CASCADE" });
