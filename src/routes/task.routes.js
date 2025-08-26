@@ -17,8 +17,8 @@ import {
 const routesTask = express.Router();
 
 routesTask.post("/tasks", createTaskValidation, controller, postTask);
-routesTask.get("/tasks", getTaskValidation, controller, getAllTask);
-routesTask.get("/tasks/:id", controller, getTaskporId);
+routesTask.get("/tasks", controller, getAllTask);
+routesTask.get("/tasks/:id", getTaskValidation, controller, getTaskporId);
 routesTask.put("/tasks/:id", updateTaskValidation, controller, updateTask);
 routesTask.delete("/tasks/:id", deleteTaskValidation, controller, deleteTask);
 

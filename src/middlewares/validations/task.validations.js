@@ -47,12 +47,6 @@ export const deleteTaskValidation = [
     .withMessage(`ID debe ser un numero entero positivo`)
     .toInt(),
 ];
-export const getAllTaskValidation = [
-  param("id")
-    .isInt({ min: 1 })
-    .withMessage(`ID debe ser un numero entero positivo`)
-    .toInt(),
-];
 export const getTaskValidation = [
   param("id")
     .isInt({ min: 1 })

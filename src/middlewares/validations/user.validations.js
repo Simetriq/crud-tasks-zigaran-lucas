@@ -4,6 +4,7 @@ export const createUser = [
   body("name").trim().notEmpty().isLength({ min: 2, max: 50 }).escape(),
   body("email")
     .trim()
+    .notEmpty()
     .isEmail()
     .withMessage("Email invalido")
     .normalizeEmail()
@@ -37,12 +38,7 @@ export const deleteUserValidation = [
 ];
 export const userByIdValidation = [
   param("id")
-    .isInt({ min: 1 })
-    .withMessage(`ID debe ser un numero entero positivo`)
-    .toInt(),
-];
-export const allUserValidation = [
-  param("id")
+    .notEmpty()
     .isInt({ min: 1 })
     .withMessage(`ID debe ser un numero entero positivo`)
     .toInt(),

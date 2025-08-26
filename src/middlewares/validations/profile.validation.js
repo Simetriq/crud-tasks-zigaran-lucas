@@ -24,12 +24,7 @@ export const deleteProfileValidation = [
     .withMessage(`ID debe ser un numero entero positivo`)
     .toInt(),
 ];
-export const allProfilesValidation = [
-  param("id")
-    .isInt({ min: 1 })
-    .withMessage(`ID debe ser un numero entero positivo`)
-    .toInt(),
-];
+
 export const getProfileByIdValidation = [
   param("id")
     .isInt({ min: 1 })

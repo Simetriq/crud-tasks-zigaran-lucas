@@ -22,6 +22,7 @@ const TaskModel = sequelize.define(
   },
   {
     timestamps: false,
+    // paranoid: true,
   }
 );
 export default TaskModel;
@@ -35,3 +36,12 @@ export default TaskModel;
 TaskModel.belongsTo(UserModel, { foreignKey: "user_id", onDelete: "CASCADE" });
 
 UserModel.hasMany(TaskModel, { foreignKey: "user_id", onDelete: "CASCADE" });
+
+UserModel.addHook("afterDestroy", async (user) => {
+  const users = await TaskModel.findOne({
+    where: { user_id: user.dataValues.id },
+  });
+  if (users) {
+    await users.destroy;
+  }
+});
