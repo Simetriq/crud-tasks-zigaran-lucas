@@ -18,7 +18,11 @@ export const createUser = [
         return Promise.reject("Error checking email availability");
       }
     }),
-  body("password").trim().isLength({ min: 6 }).matches(/\d/),
+  body("password")
+    .trim()
+    .isLength({ min: 1 })
+    .withMessage("La contraseña debe de ser minimo de 1")
+    .matches(/\d/),
 ];
 
 export const updateUserValidation = [

@@ -14,7 +14,7 @@ const CourseModel = sequelize.define(
     },
   },
   {
-    timestamps: false,
+    paranoid: true,
   }
 );
 
